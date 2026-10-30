@@ -1,4 +1,4 @@
-#Expense Tracker - Installment 1. Author: Kurt Cyrus Viel T. Lopez. A prototype main menu for an expense tracker program.
+#Expense Tracker - Installment 4. Author: Kurt Cyrus Viel T. Lopez. The tracker makes decisions.
 print("=" * 40)
 print("\t\tEXPENSE TRACKER\n \tA tool to log your expenses.")
 print("=" * 40)
@@ -7,18 +7,37 @@ print("\nMAIN MENU" \
 "\n [2] View all expenses\t\t(coming soon)" \
 "\n [3] Show total spent\t\t(coming soon)" \
 "\n [4] Exit\t\t\t(coming soon)")
-print("-" * 40)
-print("Made by: Kurt Cyrus Viel Lopez  |  Installment 1")
-print("=" * 40)
 
-#Expense Tracker - Installment 3. Author: Kurt Cyrus Viel T. Lopez. 
 name = input("\nWhat's your name? ")
 print("Welcome,", name,"! Let's log two expenses.\n")
 
 firstExpense = input("First expense? ")
 firstExpenseAmount = float(input("Amount? "))
+
+if firstExpenseAmount > 200 :
+    print("  Huge expense - are you sure?")
+elif firstExpenseAmount > 100 :
+    print("  Big expense.")
+elif firstExpenseAmount > 50 :
+    print("  Moderate expense.")
+elif firstExpenseAmount < 50 :
+    print("  Small expense.")
+
 secondExpense = input("Second expense? ")
 secondExpenseAmount = float(input("Amount? "))
+
+if secondExpenseAmount > 200 :
+    print("  Huge expense - are you sure?")
+elif secondExpenseAmount > 100 :
+    print("  Big expense.")
+elif secondExpenseAmount > 50 :
+    print("  Moderate expense.")
+elif secondExpenseAmount < 50 :
+    print("  Small expense.")
+
+if firstExpenseAmount > 100 and secondExpenseAmount > 100 :
+    print("  Two big expenses in a row - slow down!")
+
 subtotal = firstExpenseAmount + secondExpenseAmount
 tax_percent = float(input("Tax rate %? "))
 budget = float(input("Your budget? "))
@@ -34,8 +53,14 @@ print("SUMMARY" \
 "\nSubtotal:\t\t$", subtotal, \
 "\nAverage:\t\t$", subtotal / 2, \
 f"\nTax ({tax_percent}):\t\t$ {tax}" \
-"\nGrand total:\t\t$", total, \
-"\nOver budget? \t\t", over_budget, \
-f"\nLeft in budget: \t$ {left:.2f}")
+"\nGrand total:\t\t$", total)
+
+if total > budget :
+    print("Over budget by $", abs(left), "!")
+elif total > budget * 0.9 :
+    print("Careful: only $", left, " left.")
+else :
+    print("Within budget: $", left, " left.")
+
 print("-" * 40)
-print("Made by: Kurt Cyrus Viel Lopez  |  Installment 3")
+print("Made by: Kurt Cyrus Viel Lopez  |  Installment 4")

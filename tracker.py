@@ -1,66 +1,75 @@
-#Expense Tracker - Installment 4. Author: Kurt Cyrus Viel T. Lopez. The tracker makes decisions.
+#Expense Tracker - Installment 5. Author: Kurt Cyrus Viel T. Lopez. The tracker makes decisions.
 print("=" * 40)
 print("\t\tEXPENSE TRACKER\n \tA tool to log your expenses.")
 print("=" * 40)
-print("\nMAIN MENU" \
-"\n [1] Add an expense \t\t(coming soon)" \
-"\n [2] View all expenses\t\t(coming soon)" \
-"\n [3] Show total spent\t\t(coming soon)" \
-"\n [4] Exit\t\t\t(coming soon)")
 
+subtotal = 0
+expenseCount = 0
+bigExpenseWarning = False
 name = input("\nWhat's your name? ")
-print("Welcome,", name,"! Let's log two expenses.\n")
-
-firstExpense = input("First expense? ")
-firstExpenseAmount = float(input("Amount? "))
-
-if firstExpenseAmount > 200 :
-    print("  Huge expense - are you sure?")
-elif firstExpenseAmount > 100 :
-    print("  Big expense.")
-elif firstExpenseAmount > 50 :
-    print("  Moderate expense.")
-elif firstExpenseAmount < 50 :
-    print("  Small expense.")
-
-secondExpense = input("Second expense? ")
-secondExpenseAmount = float(input("Amount? "))
-
-if secondExpenseAmount > 200 :
-    print("  Huge expense - are you sure?")
-elif secondExpenseAmount > 100 :
-    print("  Big expense.")
-elif secondExpenseAmount > 50 :
-    print("  Moderate expense.")
-elif secondExpenseAmount < 50 :
-    print("  Small expense.")
-
-if firstExpenseAmount > 100 and secondExpenseAmount > 100 :
-    print("  Two big expenses in a row - slow down!")
-
-subtotal = firstExpenseAmount + secondExpenseAmount
 tax_percent = float(input("Tax rate %? "))
 budget = float(input("Your budget? "))
-tax = tax_percent / 100 * subtotal
-total = subtotal + tax
-over_budget = budget <= total
-left = budget - total
+print("Welcome,", name,"!\n")
 
-print("\n", ("-" * 40))
-print("SUMMARY" \
-"\n - ", firstExpense, "\t\t$", firstExpenseAmount, \
-"\n - ", secondExpense, "\t\t$", secondExpenseAmount, \
-"\nSubtotal:\t\t$", subtotal, \
-"\nAverage:\t\t$", subtotal / 2, \
-f"\nTax ({tax_percent}):\t\t$ {tax}" \
-"\nGrand total:\t\t$", total)
+print("\nMAIN MENU" \
+"\n [1] Add an expense" \
+"\n [2] View all expenses\t\t(coming soon)" \
+"\n [3] Show total spent" \
+"\n [4] Exit")
 
-if total > budget :
-    print("Over budget by $", abs(left), "!")
-elif total > budget * 0.9 :
-    print("Careful: only $", left, " left.")
-else :
-    print("Within budget: $", left, " left.")
+while True :
+    choice = input("Choose 1-4: ")
 
+    if choice == "1" : 
+        expenseAmount = float(input("Amount? "))
+        
+        if expenseAmount > 200 :
+            print("  Huge expense - are you sure?")
+        elif expenseAmount > 100 :
+            print("  Big expense.")
+        elif expenseAmount > 50 :
+            print("  Moderate expense.")
+        elif expenseAmount <= 50 :
+            print("  Small expense.")
+
+        if expenseAmount > 100 :
+            if bigExpenseWarning :
+                print("  Two big expenses in a row - slow down!")
+            bigExpenseWarning = True
+        else :
+            bigExpenseWarning = False
+
+        subtotal += expenseAmount
+        expenseCount += 1
+    
+    elif choice == "2" :
+        print("Coming soon: the tracker can't remember each item yet.")
+
+    elif choice == "3" :
+        tax = tax_percent / 100 * subtotal
+        total = subtotal + tax
+        over_budget = budget <= total
+        left = budget - total
+
+        print("   Expenses:\t\t", expenseCount)
+        print("   Subtotal:\t\t$", subtotal)
+        print("   Tax (", tax_percent, "):\t$", tax)
+        print("   Grand total:\t\t$", total)
+        
+        if total > budget :
+            print("   Over budget by $", abs(left), "!")
+        elif total > budget * 0.9 :
+            print("   Careful: only $", left, " left.")
+        else :
+            print("   Within budget: $", left, " left.")
+
+    elif choice == "4" :
+        print("Goodbye,", name, "!")
+        break
+
+    else :
+        print("Please choose 1, 2, 3 or 4.")
+    
 print("-" * 40)
-print("Made by: Kurt Cyrus Viel Lopez  |  Installment 4")
+print("Made by: Kurt Cyrus Viel Lopez  |  Installment 5")
+print("=" * 40)
